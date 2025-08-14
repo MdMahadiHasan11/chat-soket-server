@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Invoice</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 20px;
+      }
+      .invoice-container {
+        max-width: 700px;
+        margin: auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .invoice-details {
+        margin: 20px 0;
+      }
+      .invoice-details p {
+        margin: 8px 0;
+        font-size: 16px;
+        color: #555;
+      }
+      .highlight {
+        font-weight: bold;
+        color: #000;
+      }
+      .footer {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 14px;
+        color: #888;
+      }
+      .download-btn {
+        display: inline-block;
+        padding: 10px 15px;
+        background: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      .download-btn:hover {
+        background: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+      <h1>Booking Invoice</h1>
+      <div class="invoice-details">
+        <p>
+          <span class="highlight">Transaction ID:</span> <%= transactionId %>
+        </p>
+        <p><span class="highlight">Tour Title:</span> <%= tourTitle %></p>
+        <p><span class="highlight">Customer Name:</span> <%= userName %></p>
+        <p>
+          <span class="highlight">Booking Date:</span> <%=
+          bookingDate.toDateString() %>
+        </p>
+        <p><span class="highlight">Guest Count:</span> <%= guestCount %></p>
+        <p>
+          <span class="highlight">Total Amount Paid:</span> $<%=
+          totalAmount.toFixed(2) %>
+        </p>
+      </div>
+
+      <div style="text-align: center">
+        <a href="<%= invoiceUrl %>" class="download-btn" target="_blank"
+          >Download Invoice PDF</a
+        >
+      </div>
+
+      <div class="footer">
+        Thank you for booking with us. We hope you enjoy your trip!
+      </div>
+    </div>
+  </body>
+</html>
