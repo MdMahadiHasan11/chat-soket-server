@@ -51,8 +51,6 @@ const updateUser = asyncHandler(
       ...req.body,
       picture: req.file?.path,
     };
-    console.log(payload);
-
     const verifiedToken = req.user;
 
     const result = await UserServices.updateUser(
