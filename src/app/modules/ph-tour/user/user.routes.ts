@@ -5,9 +5,16 @@ import { validateRequest } from "../../../middlewares/validateRequest";
 import { Role } from "./user.interface";
 import { checkAuth } from "../../../middlewares/checkAuth";
 import { multerUpload } from "../../../../config/multer.config";
+import { SoketUserControllers } from "../../chat-soket/user/user.controller";
 
 const router = Router();
+router.get(
+  "/sidebar/:id",
+  checkAuth(...Object.values(Role)),
+  SoketUserControllers.getAllUsersForSidebar
+);
 
+// ////////////////
 router.post(
   "/register",
   validateRequest(createUserZodSchema),
@@ -19,17 +26,17 @@ router.get(
   UserControllers.getAllUsers
 );
 router.get("/me", checkAuth(...Object.values(Role)), UserControllers.getMe);
-router.get(
-  "/:id",
-  checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
-  UserControllers.getSingleUser
-);
 router.patch(
   "/:id",
   multerUpload.single("file"),
   validateRequest(updateUserZodSchema),
   checkAuth(...Object.values(Role)),
   UserControllers.updateUser
+);
+router.get(
+  "/:id",
+  checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
+  UserControllers.getSingleUser
 );
 // /api/v1/user/:id
 

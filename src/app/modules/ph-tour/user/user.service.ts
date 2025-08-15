@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import AppError from "../../../errorHelpers/AppError";
 import { IAuthProvider, IUser, Role } from "./user.interface";
 import { User } from "./user.model";
@@ -38,7 +39,9 @@ const createUser = async (payload: Partial<IUser>) => {
     auths: [authProvider],
     ...rest,
   });
-  return user;
+
+  const { password: pass, ...restUser } = user.toObject();
+  return restUser;
 };
 
 const updateUser = async (
@@ -120,7 +123,7 @@ const updateUser = async (
   const user = await User.findOneAndUpdate({ _id: userId }, payload, {
     new: true,
     runValidators: true,
-  });
+  }).select("-password");
   if (payload.picture && isExist.picture) {
     await deleteImageFromCLoudinary(isExist.picture);
   }
@@ -145,7 +148,6 @@ const getMe = async (userId: string) => {
   if (!user) {
     throw new AppError(httpStatus.BAD_REQUEST, "User does not exist");
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { password, ...rest } = user.toObject();
   return {
     data: rest,
