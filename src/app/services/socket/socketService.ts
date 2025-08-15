@@ -51,10 +51,10 @@ export class SocketService {
       this.io.emit("onlineUsers", this.userSocketManager.getOnlineUsers());
 
       // Initialize services for this socket
-      this.chatService.handleConnection(socket);
-      this.notificationService.handleConnection(socket);
-      this.roomService.handleConnection(socket);
-      this.messageSocketService.handleConnection(socket);
+      // this.chatService.handleConnection(socket);
+      // this.notificationService.handleConnection(socket);
+      // this.roomService.handleConnection(socket);
+      // this.messageSocketService.handleConnection(socket);
 
       // Handle disconnection
       socket.on("disconnect", (reason) => {
@@ -122,3 +122,16 @@ export const getIO = (): SocketIOServer => {
   }
   return globalSocketService.getIO();
 };
+
+//uses in others files
+
+// routes/post.ts
+// import { getIO } from "../socket/SocketService";
+// import { userSocketManager } from "../wherever/you/expose"; // বা get থেকে নিন
+
+// router.post("/notify/:userId", async (req, res) => {
+//   const io = getIO();
+//   const socketId = userSocketManager.getSocketId(req.params.userId);
+//   if (socketId) io.to(socketId).emit("notification", { msg: "Hello!" });
+//   res.json({ ok: true });
+// });
