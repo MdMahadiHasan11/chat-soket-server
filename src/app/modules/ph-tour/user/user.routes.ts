@@ -5,7 +5,7 @@ import { validateRequest } from "../../../middlewares/validateRequest";
 import { Role } from "./user.interface";
 import { checkAuth } from "../../../middlewares/checkAuth";
 import { multerUpload } from "../../../../config/multer.config";
-import { SoketUserControllers } from "../../chat-soket/user/user.controller";
+import { SoketUserControllers } from "../../chat-socket/user/user.controller";
 
 const router = Router();
 router.get(

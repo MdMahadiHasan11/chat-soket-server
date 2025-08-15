@@ -7,7 +7,7 @@ import { BookingRoutes } from "../modules/ph-tour/booking/booking.route";
 import { PaymentRoutes } from "../modules/ph-tour/payment/payment.route";
 import { OtpRoutes } from "../modules/ph-tour/otp/otp.route";
 import { StatsRoutes } from "../modules/ph-tour/stats/stats.route";
-import { SoketMessageRoutes } from "../modules/chat-soket/message/message.routes";
+// import { SoketMessageRoutes } from "../modules/chat-socket/message/message.routes";
 
 export const router = Router();
 
@@ -44,10 +44,10 @@ const moduleRoutes = [
     path: "/stats",
     route: StatsRoutes,
   },
-  {
-    path: "/message",
-    route: SoketMessageRoutes,
-  },
+  // {
+  //   path: "/message",
+  //   route: SoketMessageRoutes,
+  // },
 ];
 moduleRoutes.forEach((route) => {
   router.use(route.path, route.route);
