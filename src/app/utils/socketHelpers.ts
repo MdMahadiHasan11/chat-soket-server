@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
-import { io } from "../server";
+// import { io } from "../server";
+
+import { io } from "../../server";
 
 // Helper functions to emit events from anywhere in the application
 

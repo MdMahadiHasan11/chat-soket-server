@@ -3,9 +3,6 @@
 import type { Server, Socket } from "socket.io";
 import type { UserSocketManager } from "./userSocketManager";
 import { MessageServices } from "../../modules/chat-socket/messageService";
-// import { MessageServices } from "../../modules/chat-socket/message/message.service";
-// import { MessageServices } from "../messageService";
-
 export class MessageSocketService {
   private io: Server;
   private userSocketManager: UserSocketManager;
@@ -43,9 +40,9 @@ export class MessageSocketService {
         // Confirm to sender
         socket.emit("messageSent", newMessage);
 
-        console.log("[v0] Message sent successfully:", newMessage._id);
+        console.log(" Message sent successfully:", newMessage._id);
       } catch (error) {
-        console.error("[v0] Error sending message:", error);
+        console.error(" Error sending message:", error);
         socket.emit("error", {
           type: "MESSAGE_SEND_ERROR",
           message: "Failed to send message",
@@ -70,9 +67,9 @@ export class MessageSocketService {
           );
         }
 
-        console.log("[v0] Message marked as seen:", messageId);
+        console.log(" Message marked as seen:", messageId);
       } catch (error) {
-        console.error("[v0] Error marking message as seen:", error);
+        console.error(" Error marking message as seen:", error);
         socket.emit("error", {
           type: "MARK_SEEN_ERROR",
           message: "Failed to mark message as seen",
@@ -96,9 +93,9 @@ export class MessageSocketService {
         const result = await MessageServices.getAllMessages(userId, receiverId);
         socket.emit("messagesLoaded", result.data);
 
-        console.log("[v0] Messages loaded for user:", userId);
+        console.log(" Messages loaded for user:", userId);
       } catch (error) {
-        console.error("[v0] Error loading messages:", error);
+        console.error(" Error loading messages:", error);
         socket.emit("error", {
           type: "LOAD_MESSAGES_ERROR",
           message: "Failed to load messages",
@@ -110,7 +107,7 @@ export class MessageSocketService {
   // Handle disconnection
   handleDisconnection(socket: Socket): void {
     // Clean up any message-related resources
-    console.log("[v0] Message service disconnection handled for:", socket.id);
+    console.log(" Message service disconnection handled for:", socket.id);
   }
 
   // Send message to specific user

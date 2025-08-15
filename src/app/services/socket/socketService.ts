@@ -8,6 +8,8 @@ import { MessageSocketService } from "./messageSocketService";
 import { authenticateSocket } from "../../middlewares/socketAuth";
 // import { authenticateSocket } from "../../middleware/socketAuth";
 
+let globalSocketService: SocketService | null = null;
+
 export class SocketService {
   private io: SocketIOServer;
   private userSocketManager: UserSocketManager;
@@ -98,11 +100,25 @@ export class SocketService {
   public getMessageSocketService(): MessageSocketService {
     return this.messageSocketService;
   }
+
+  public getIO(): SocketIOServer {
+    return this.io;
+  }
 }
 
 // Initialize and export socket service
 export const initializeSocketIO = (io: SocketIOServer): SocketService => {
   const socketService = new SocketService(io);
   socketService.initialize();
+  globalSocketService = socketService;
   return socketService;
+};
+
+export const getIO = (): SocketIOServer => {
+  if (!globalSocketService) {
+    throw new Error(
+      "Socket.IO not initialized. Call initializeSocketIO first."
+    );
+  }
+  return globalSocketService.getIO();
 };
