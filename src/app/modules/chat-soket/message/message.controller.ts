@@ -6,8 +6,18 @@ import { sendResponse } from "../../../utils/sendResponse";
 import asyncHandler from "../../../utils/asyncHandler";
 import { MessageServices } from "./message.service";
 import { JwtPayload } from "jsonwebtoken";
+import { cloudinaryUpload } from "../../../../config/cloudinary.config";
 const createMessage = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
+    // let url = "";
+    // if (req.body.media && !req.file) {
+    //   const upload = await cloudinaryUpload.uploader.upload(
+    //     req.body.media.data
+    //   );
+    //   console.log("upload", upload);
+    //   url = upload.secure_url;
+    // }
+    // console.log("req.body3", req.body);
     const payload = {
       ...req.body,
       media: req.file?.path,
